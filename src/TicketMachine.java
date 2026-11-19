@@ -58,4 +58,10 @@ public class TicketMachine {
 		
 		return total;
 	}
+	
+	public int emptyMachine() {
+		int empty = total;
+		total = 0;
+		return empty;
+	}
 }
