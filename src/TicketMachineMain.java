@@ -5,28 +5,36 @@ public class TicketMachineMain {
 		
 		TicketMachine machine = new TicketMachine(300);
 		
-		System.out.printf("Τιμή εισιτηρίου: %d cents | Υπόλοιπο: %d cents %n", machine.getPrice(), machine.getBalance());
+		System.out.println("=== ΕΚΔΟΤΗΡΙΟ ΕΙΣΙΤΗΡΙΩΝ ===");
 		
 		boolean running = true;
 
 		while (running) {
-			System.out.println("-------------------------------------");
-			System.out.println();
-			System.out.println("1. Εισαγωγή χρημάτων");
-			System.out.println("2. Εκτύπωση εισιτηρίου");
-			System.out.println("3. Επιστροφή ρέστων");
-			System.out.println("4. Άδειασμα ταμείου (Διαχειριστής)");
-			System.out.println("0. Έξοδος");
-			System.out.println();
-			System.out.println("-------------------------------------");
-			System.out.print("\n Επιλογή: ");
+			System.out.println("\n----------------------------------------");
+			System.out.printf(" Τιμή Εισιτηρίου: %d cents | Υπόλοιπο: %d cents%n",
+					machine.getPrice(), machine.getBalance());
+			System.out.println("----------------------------------------");
+			System.out.println("  [1] Εισαγωγή χρημάτων");
+			System.out.println("  [2] Εκτύπωση εισιτηρίου");
+			System.out.println("  [3] Επιστροφή ρέστων");
+			System.out.println("  [4] Άδειασμα ταμείου (Διαχειριστής)");
+			System.out.println("  [0] Έξοδος");
+			System.out.print("\n> Επιλογή: ");
 			int choice = sc.nextInt();
 			switch (choice) {
 			
 				case 1 -> {
-					System.out.println("Εισάγετε το απαιτούμενο ποσό: ");
+					System.out.print("Εισάγετε ποσό (cents): ");
+					
 					int value = sc.nextInt();
+					int before = machine.getBalance();
+					
 					machine.insertMoney(value);
+					
+					if (machine.getBalance() > before) {
+						System.out.println("Το υπόλοιπο ενημερώθηκε.");
+					}
+					
 				}
 				case 2 -> {
 					machine.printTicket();
@@ -41,7 +49,7 @@ public class TicketMachineMain {
 					System.out.println("Έξοδος από το σύστημα.");
 					running = false;
 				}
-				default -> System.out.println("Πληκτρολογήστε μία από τις παραπάνω επιλογές.");
+				default -> System.out.println("Μη έγκυρη επιλογή. Δοκιμάστε ξανά.");
 			}
 			
 		}
